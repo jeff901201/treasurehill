@@ -21,10 +21,10 @@ app = Flask(__name__)
 
 # Channel Access Token(TOKEN)
 line_bot_api = LineBotApi(
-    ""
+    "AGhhX07Z2jbJtJRMnlOWVeZM33x7V7OLfgiLdQhfKsD4LvSY6gS9j6cFbXFNRhJrGdg5ck/R/9a/i8auqkPsKK6R+D+yEfBJ6/tYXB2KwvG7Igz3yaMR1HdN8ftk1lrniFYiZRik1MmuZeiVdIo9ewdB04t89/1O/w1cDnyilFU="
 )
 # Channel Secret
-handler = WebhookHandler("")
+handler = WebhookHandler("bdf756c2189c2d8d9605630c1b521d66")
 # Your user ID
 # line_bot_api.push_message('U550173d8899009fad32fa4dc184a2ada', TextSendMessage(text='恭喜成功第一步了！'))
 
