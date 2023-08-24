@@ -54,7 +54,7 @@ def handle_message(event):
     basic_fun_paramater = basic_fun.create_point_and_keyword(message)
     if len(basic_fun_paramater) > 0:
         match basic_fun_paramater[-1]:
-            case "Image_Messge":
+            case "Image_Message":
                 ReplyMessage = basic_fun.create_image_message(basic_fun_paramater[0], basic_fun_paramater[1])
 
             case "Image_Carousel_Template":
