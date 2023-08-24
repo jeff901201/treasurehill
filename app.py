@@ -51,29 +51,42 @@ def callback():
 def handle_message(event):
     message = event.message.text
 
-    basic_fun_paramater = basic_fun.create_point_and_keyword(message)
-    if len(basic_fun_paramater) > 0:
-        match basic_fun_paramater[-1]:
+    basic_fun_parameter = basic_fun.create_point_and_keyword(message)
+    if len(basic_fun_parameter) > 0:
+        match basic_fun_parameter[-1]:
             case "Image_Message":
-                ReplyMessage = basic_fun.create_image_message(basic_fun_paramater[0], basic_fun_paramater[1])
+                ReplyMessage = basic_fun.create_image_message(
+                    basic_fun_parameter[0], basic_fun_parameter[1]
+                )
 
             case "Image_Carousel_Template":
-                image_carousel_template_message = basic_fun.create_image_carousel_template(
-                    basic_fun_paramater[0], basic_fun_paramater[1]
-                )
-                if len(basic_fun_paramater) == 4:
-                    confirm_template_message = basic_fun.create_confirm_template_message(
-                        basic_fun_paramater[0], basic_fun_paramater[2]
+                image_carousel_template_message = (
+                    basic_fun.create_image_carousel_template(
+                        basic_fun_parameter[0], basic_fun_parameter[1]
                     )
-                    ReplyMessage = [image_carousel_template_message, confirm_template_message]
+                )
+                if len(basic_fun_parameter) == 4:
+                    confirm_template_message = (
+                        basic_fun.create_confirm_template_message(
+                            basic_fun_parameter[0], basic_fun_parameter[2]
+                        )
+                    )
+                    ReplyMessage = [
+                        image_carousel_template_message,
+                        confirm_template_message,
+                    ]
                 else:
                     ReplyMessage = image_carousel_template_message
 
             case "Text_Message":
-                ReplyMessage = basic_fun.create_text_message(basic_fun_paramater[0], basic_fun_paramater[1])
+                ReplyMessage = basic_fun.create_text_message(
+                    basic_fun_parameter[0], basic_fun_parameter[1]
+                )
 
             case "ImageMap_Message":
-                ReplyMessage = basic_fun.create_imagemap_message(basic_fun_paramater[0], basic_fun_paramater[1])
+                ReplyMessage = basic_fun.create_imagemap_message(
+                    basic_fun_parameter[0], basic_fun_parameter[1]
+                )
 
             case _:
                 ReplyMessage = TextSendMessage(text="功能未完成")
@@ -85,10 +98,14 @@ def handle_message(event):
             # =========================================================================
             # others
             case "版本":
-                line_bot_api.reply_message(event.reply_token, TextSendMessage(text=str(version())))
+                line_bot_api.reply_message(
+                    event.reply_token, TextSendMessage(text=str(version()))
+                )
 
             case _:
-                line_bot_api.reply_message(event.reply_token, TextSendMessage(text=message))
+                line_bot_api.reply_message(
+                    event.reply_token, TextSendMessage(text=message)
+                )
 
 
 # ======== 主程式 ==========
