@@ -52,6 +52,7 @@ def handle_message(event):
     message = event.message.text
 
     basic_fun_parameter = basic_fun.create_point_and_keyword(message)
+    print(basic_fun_parameter)
     if len(basic_fun_parameter) > 0:
         match basic_fun_parameter[-1]:
             case "Image_Message":

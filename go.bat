@@ -3,7 +3,7 @@ py .\version\update_version.py update
 @echo on
 ::<cmd>start go.bat
 git add .
-git commit -m "check now"
-git push line_bot main
+git commit -m "first push"
+git push origin second
 @echo off
 py .\version\update_version.py now
