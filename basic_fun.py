@@ -55,7 +55,7 @@ def create_point_and_keyword(message):
             # Match function_type to categorize the message
             match function_type:
                 case "區域位置圖" | "細部放大圖" | "全區地圖":
-                    point_and_keyword.append("Image_Messge")
+                    point_and_keyword.append("Image_Message")
                 case "實景圖" | "路線":
                     point_and_keyword.append("Image_Carousel_Template")
                 case "景點介紹" | "導航":
@@ -79,7 +79,9 @@ def create_point_and_keyword(message):
 # Function to create an ImageSendMessage using the provided point_number and keyword
 def create_image_message(point_number, keyword):
     # Get the URLs for the image message from the select_image_message_info function
-    image_message_data = image_message_info.select_image_message_info(point_number, keyword)
+    image_message_data = image_message_info.select_image_message_info(
+        point_number, keyword
+    )
 
     # Create the ImageSendMessage object using the retrieved URLs
     image_message = ImageSendMessage(
@@ -107,13 +109,17 @@ def create_imagemap_message(point_number, keyword):
                 height=action["area"].height,  # Height of the action area
             ),
         )
-        for action in image_map_data["actions"]  # Iterate through all actions in the Imagemap
+        for action in image_map_data[
+            "actions"
+        ]  # Iterate through all actions in the Imagemap
     ]
 
     # Create an ImagemapSendMessage object with the extracted information
     imagemap_message = ImagemapSendMessage(
         base_url=image_map_data["baseUrl"],  # Set the base URL for the Imagemap
-        alt_text=image_map_data["altText"],  # Set the alternative text description for the Imagemap
+        alt_text=image_map_data[
+            "altText"
+        ],  # Set the alternative text description for the Imagemap
         base_size=image_map_data["baseSize"],  # Set the base size of the Imagemap
         actions=actions,  # Set the list of actions for the Imagemap
     )
@@ -125,7 +131,9 @@ def create_imagemap_message(point_number, keyword):
 # Function to create an Image Carousel Template message using the provided point_number and keyword
 def create_image_carousel_template(point_number, keyword):
     # Get the image carousel data using the select_image_carousel_info function
-    image_carousel_data = image_carousel_info.select_image_carousel_info(point_number, keyword)
+    image_carousel_data = image_carousel_info.select_image_carousel_info(
+        point_number, keyword
+    )
 
     # Create Image Carousel columns
     image_carousel_columns = [
@@ -142,7 +150,9 @@ def create_image_carousel_template(point_number, keyword):
     # Create Image Carousel Template message
     image_carousel_template_message = TemplateSendMessage(
         alt_text=keyword,  # Alternative text for devices that don't support image carousels
-        template=ImageCarouselTemplate(columns=image_carousel_columns),  # Set the columns for the Image Carousel
+        template=ImageCarouselTemplate(
+            columns=image_carousel_columns
+        ),  # Set the columns for the Image Carousel
     )
 
     return image_carousel_template_message  # Return the created Image Carousel Template message
@@ -162,7 +172,11 @@ def create_text_message(point_number, keyword):
 # Function to create a Confirm Template message using the provided point_number and keyword
 def create_confirm_template_message(point_number, keyword):
     # Get the data for Confirm Template message using the select_confirm_template_message_info function
-    confirm_template_data = confirm_template_message_info.select_confirm_template_message_info(point_number, keyword)
+    confirm_template_data = (
+        confirm_template_message_info.select_confirm_template_message_info(
+            point_number, keyword
+        )
+    )
 
     # Create a ConfirmTemplate object with the text and actions defined in the data
     confirm_template_object = ConfirmTemplate(
@@ -183,7 +197,9 @@ def create_confirm_template_message(point_number, keyword):
 
     # Create the TemplateSendMessage using the ConfirmTemplate and alt_text
     confirm_template_message = TemplateSendMessage(
-        alt_text=confirm_template_data["alt_text"],  # Alt text for devices that can't display templates
+        alt_text=confirm_template_data[
+            "alt_text"
+        ],  # Alt text for devices that can't display templates
         template=confirm_template_object,  # Set the created ConfirmTemplate as the content of the TemplateSendMessage
     )
 
